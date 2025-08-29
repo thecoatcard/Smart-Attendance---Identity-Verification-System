@@ -1,0 +1,8 @@
+Flask
+SQLAlchemy
+face_recognition
+opencv-python
+dlib
+flask-cors
+google-generativeai
+gunicorn

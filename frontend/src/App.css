@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- Base Styles --- */
+:root {
+  --bg-main: #F8F7FF;
+  --bg-card: #FFFFFF;
+  --text-primary: #1B1B3A;
+  --text-secondary: #5E548E;
+  --accent-primary: #7F5AF0;
+  --accent-secondary: #9F86C0;
+  --border-color: #D9D9F3;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  cursor: none; /* Hide the default cursor */
+}
+
+.custom-cursor .cursor-circle {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--accent-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 0.1s ease;
+  z-index: 9999;
+}
+
+.custom-cursor .cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: all 0.1s ease;
+  z-index: 9999;
+}
+
+.custom-cursor.hover .cursor-circle {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0.5;
+}
+
+
+/* --- App Layout --- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-bar {
+  background-color: var(--bg-main) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+  padding: 0 4rem;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide nav-links on small screens */
+  }
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none !important;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-main);
+  box-shadow: 0 6px 20px rgba(127, 90, 240, 0.6);
+  border-radius: 16px;
+  transform: translateY(-2px);
+  padding: 0.9rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+.nav-link.active {
+  background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+  color: var(--bg-main);
+  box-shadow: 0 6px 20px rgba(127, 90, 240, 0.6);
+  border-radius: 16px;
+  transform: translateY(-2px);
+  padding: 0.9rem 1.5rem;
+  font-size: 1.1rem;
+}
+
+
+
+/* --- Main Content & Cards --- */
+.glass-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  padding: 3rem;
+  margin-top: 3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.user-card {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white for glass effect */
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+  border-radius: 20px;
+  padding: 2.5rem; /* Slightly more padding */
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Lighter border */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* More pronounced shadow */
+}
+
+.user-card:hover {
+  transform: translateY(-10px) scale(1.02); /* More dynamic hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+  border-color: var(--accent-primary); /* Highlight border on hover */
+}
+
+.user-card h6 {
+  color: var(--accent-primary); /* Use accent color for name */
+  font-weight: 700; /* Bolder font */
+  margin-bottom: 1.2rem; /* More space below name */
+  font-size: 1.5rem; /* Larger font size */
+}
+
+.user-card p {
+  margin: 0.6rem 0; /* Adjusted margin */
+  font-size: 1.05rem; /* Slightly larger font */
+  color: var(--text-primary); /* Primary text color */
+}
+
+.attendance-percentage {
+  font-size: 1.8rem; /* Large and prominent */
+  font-weight: 800; /* Extra bold */
+  color: var(--accent-primary); /* Accent color */
+  text-align: center;
+  margin-top: 1.5rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1); /* Separator line */
+}
+
+/* --- Camera & Canvas --- */
+.camera-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.webcam, .canvas {
+  width: 100%;
+  max-width: 500px; /* Or any other size */
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.status-text {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(27, 27, 58, 0.8);
+  color: #F8F7FF;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* --- Modern UI Elements --- */
+.modern-button {
+  background: var(--accent-primary);
+  border: 0;
+  border-radius: 12px;
+  color: var(--bg-main);
+  font-weight: 600;
+  height: 56px;
+  padding: 0 35px;
+  margin-top: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.5px;
+}
+
+.modern-button:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 6px 20px rgba(127, 90, 240, 0.5);
+  transform: translateY(-3px);
+}
+
+.modern-input .MuiInputBase-root {
+  background: var(--bg-card);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+}
+
+.modern-input .MuiInputLabel-root {
+  color: var(--text-secondary);
+  font-family: 'Poppins', sans-serif;
+}
+
+.modern-input .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-color) !important;
+}
+
+/* --- View Students User Cards --- */
+.admin-dashboard {
+  padding: 1rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.refresh-button {
+  margin-top: 0;
+}
+
+.user-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.user-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.user-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.1);
+}
+
+.user-card h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.user-card p {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.status-present {
+  color: #4caf50;
+  font-weight: bold;
+  background-color: rgba(76, 175, 80, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+}
+
+.status-absent {
+  color: #f44336;
+  font-weight: bold;
+  background-color: rgba(244, 67, 54, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+}
+
+/* --- Chatbot UI --- */
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.chat-history {
+  flex-grow: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-message {
+  padding: 0.75rem 1rem;
+  border-radius: 20px;
+  max-width: 70%;
+  line-height: 1.5;
+}
+
+.chat-message.user {
+  background-color: var(--accent-primary);
+  color: var(--bg-main);
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-message.bot {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dialog-text {
+  color: var(--text-primary) !important;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .app-bar {
+    padding: 0 1rem; /* Reduced padding for smaller screens */
+  }
+
+  .nav-links {
+    flex-direction: column; /* Stack navigation links vertically */
+    gap: 0.5rem; /* Reduce gap between stacked links */
+    align-items: flex-start; /* Align links to the start */
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem; /* Smaller padding for mobile links */
+    font-size: 0.9rem; /* Smaller font size for mobile links */
+  }
+
+  .glass-card {
+    padding: 1.5rem; /* Reduced padding for smaller screens */
+    margin-top: 1.5rem; /* Reduced margin-top for smaller screens */
+  }
+
+  .glass-card > .MuiBox-root { /* Target the Box directly inside glass-card for flex layout */
+    flex-direction: column; /* Stack content vertically */
+    gap: 1.5rem; /* Adjust gap for stacked content */
+  }
+
+  .camera-container {
+    width: 100%; /* Full width for camera container */
+    max-width: unset; /* Remove max-width constraint */
+  }
+
+  .webcam, .canvas {
+    max-width: 100%; /* Ensure webcam and canvas take full width */
+  }
+
+  .user-card-grid {
+    grid-template-columns: 1fr; /* Single column for user cards on small screens */
+    gap: 1rem; /* Reduced gap for user cards */
+  }
+
+  .chat-message {
+    max-width: 90%; /* Allow chat messages to take more width */
+  }
+}
+
+@media (max-width: 480px) {
+  .app-bar {
+    padding: 0 0.5rem; /* Even smaller padding for very small screens */
+  }
+
+  .logo {
+    height: 30px; /* Smaller logo for very small screens */
+  }
+
+  .glass-card {
+    padding: 1rem; /* Even smaller padding for very small screens */
+  }
+
+  .modern-button {
+    padding: 0 20px; /* Smaller padding for buttons */
+    height: 48px; /* Smaller height for buttons */
+  }
+
+  .modern-input .MuiInputBase-root {
+    font-size: 0.9rem; /* Smaller font size for input text */
+  }
+
+  .modern-input .MuiInputLabel-root {
+    font-size: 0.9rem; /* Smaller font size for input labels */
+  }
+}
+
